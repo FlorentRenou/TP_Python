@@ -1,5 +1,5 @@
 import random
-
+from exception import *
 
 class Bus:
     def __init__(self):
@@ -10,11 +10,14 @@ class Bus:
     def add_passager(self, passager):
         if len(self.listPassager) < self.nbPlacesMax:
             self.listPassager.append(passager)
+        else:
+            raise LimitePassagerDepasserException()
 
     def getNbPlacesMax(self):
         return self.nbPlacesMax
 
     def appelIsOk(self):
+        # Besoin d'une exception ?
         return self.appel
 
     def faireAppel(self):
@@ -23,6 +26,7 @@ class Bus:
             if type(self.listPassager[i]) is Lyceen:
                 if self.listPassager[i].estAbsent() or not self.listPassager[i].hasClasse():
                     self.appel = False
+                    raise EleveAbsentException()
             i += 1
 
     def troisClassesMax(self):
@@ -31,7 +35,11 @@ class Bus:
             if type(passager) is Lyceen:
                 if passager.getClasse() not in listeClassePresenteBus:
                     listeClassePresenteBus.append(passager.getClasse())
-        return len(listeClassePresenteBus)<=3
+        if len(listeClassePresenteBus)<=3:
+            return True
+        else:
+            raise LimiteClasseDepasserException()
+        # return len(listeClassePresenteBus)<=3
 
     def unProfReferent(self):
         profReferentPresent = False
@@ -42,7 +50,11 @@ class Bus:
                         profReferentPresent = True
                     else:
                         return False
-        return profReferentPresent
+        if profReferentPresent:
+            return True
+        else:
+            raise NombreProfReferentException()
+        # return profReferentPresent
 
     def unProfPourDixLyceen(self):
         nbProf = 0
@@ -52,10 +64,15 @@ class Bus:
                 nbProf +=1
             else : 
                 nbEleve +=1
-        return nbEleve / nbProf <=10
+        if nbEleve / nbProf <=10:
+            return True
+        else:
+            raise LimiteProfParEleveDepasserException()
+        # return nbEleve / nbProf <=10
 
 
     def peutPartir(self):
+        # Besoin d'une exception ?
         return self.appelIsOk() and len(
             self.listPassager) > 0 and self.troisClassesMax() and self.unProfReferent() and self.unProfPourDixLyceen()
 
@@ -102,6 +119,7 @@ class Lyceen(Passager):
 class Classe:
     def __init__(self, nbMax, nom):
         self.nbMax = nbMax
+        # Need gestion unicité
         self.nom = nom
         self.listLyceen = []
 
@@ -109,6 +127,8 @@ class Classe:
         if len(self.listLyceen)<self.nbMax:
             self.listLyceen.append(lyceen)
             lyceen.setNomClasse(self.nom)
+        else :
+            raise LimiteEleveDepasserException()
 
     def getNom(self):
         return self.nom
