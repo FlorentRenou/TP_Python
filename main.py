@@ -42,6 +42,11 @@ classe1.add_lyceen(e9)
 classe1.add_lyceen(e10)
 classe1.add_lyceen(e11)
 
+#        try :
+#
+#        except LimiteEleveDepasserException:
+#           print("Il y a trop d'élève dans la classe")
+
 bus1 = Bus()
 bus1.add_passager(p1)
 bus1.add_passager(p2)
