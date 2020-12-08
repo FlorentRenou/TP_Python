@@ -1,4 +1,0 @@
-.vs
-.idea
-__pycache__
-venv
