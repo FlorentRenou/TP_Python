@@ -1,18 +1,22 @@
-class LimitePassagerDepasserException(Exception) :
+class LimitePassagerDepasserException(Exception):
     pass
 
-class EleveAbsentException(Exception) :
+
+class EleveAbsentException(Exception):
     pass
 
-class LimiteClasseDepasserException(Exception) :
+
+class LimiteClasseDepasserException(Exception):
     pass
 
-class NombreProfReferentException(Exception) :
+
+class NombreProfReferentException(Exception):
     pass
 
-class LimiteProfParEleveDepasserException(Exception) :
+
+class LimiteProfParEleveDepasserException(Exception):
     pass
 
-class LimiteEleveDepasserException(Exception) :
-    pass
 
+class LimiteEleveDepasserException(Exception):
+    pass

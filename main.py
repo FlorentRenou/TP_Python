@@ -4,26 +4,24 @@ from classes import *
 from interface import *
 from PyQt5.QtWidgets import QApplication
 
-
 ### On lance l'interface visuelle
-app = QApplication(sys.argv)
-ex = Interface()
-sys.exit(app.exec_())
-
+#app = QApplication(sys.argv)
+#ex = Interface()
+#sys.exit(app.exec_())
 
 p1 = Prof(True, 'nomp1', 'prenomp1')
 p2 = Prof(False, 'nomp2', 'prenomp2')
-e1 = Lyceen( 'nome1', 'prenome1')
-e2 = Lyceen( 'nome2', 'prenome2')
-e3 = Lyceen( 'nome3', 'prenome3')
-e4 = Lyceen( 'nome4', 'prenome4')
-e5 = Lyceen( 'nome5', 'prenome5')
-e6 = Lyceen( 'nome6', 'prenome6')
-e7 = Lyceen( 'nome7', 'prenome7')
-e8 = Lyceen( 'nome8', 'prenome8')
-e9 = Lyceen( 'nome9', 'prenome9')
-e10 = Lyceen( 'nome10', 'prenome10')
-e11 = Lyceen( 'nome11', 'prenome11')
+e1 = Lyceen('nome1', 'prenome1')
+e2 = Lyceen('nome2', 'prenome2')
+e3 = Lyceen('nome3', 'prenome3')
+e4 = Lyceen('nome4', 'prenome4')
+e5 = Lyceen('nome5', 'prenome5')
+e6 = Lyceen('nome6', 'prenome6')
+e7 = Lyceen('nome7', 'prenome7')
+e8 = Lyceen('nome8', 'prenome8')
+e9 = Lyceen('nome9', 'prenome9')
+e10 = Lyceen('nome10', 'prenome10')
+e11 = Lyceen('nome11', 'prenome11')
 
 classe1 = Classe(10, 'classe1')
 classe2 = Classe(10, 'classe2')
@@ -33,7 +31,7 @@ classe1.add_lyceen(e1)
 classe2.add_lyceen(e2)
 classe2.add_lyceen(e3)
 classe3.add_lyceen(e4)
-classe1.add_lyceen(e5)
+classe3.add_lyceen(e5)
 classe1.add_lyceen(e6)
 classe1.add_lyceen(e7)
 classe1.add_lyceen(e8)
@@ -58,7 +56,18 @@ bus1.add_passager(e11)
 
 print(bus1.getNbPlacesMax())
 
-bus1.faireAppel()
+try:
+    bus1.faireAppel()
 
-if bus1.peutPartir():
-    bus1.partir("Choucroutte")
+    if bus1.peutPartir():
+        bus1.partir("Choucroutte")
+except LimitePassagerDepasserException:
+    print("Le bus ne peut pas partir car: La limite de passager a été dépassé")
+except EleveAbsentException:
+    print("Le bus ne peut pas partir car: Il y a au moins un qui est élève absent ou qui n'a pas de classe")
+except LimiteClasseDepasserException:
+    print("Le bus ne peut pas partir car: Il y a plus de 3 classes différentes dans le bus")
+except NombreProfReferentException:
+    print("Le bus ne peut pas partir car: Il n'y a pas ou trop de profs référents")
+except LimiteProfParEleveDepasserException:
+    print("Le bus ne peut pas partir car: Il y a plus de 10 élèves par prof")

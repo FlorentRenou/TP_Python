@@ -1,6 +1,7 @@
 import random
 from exception import *
 
+
 class Bus:
     def __init__(self):
         self.nbPlacesMax = random.randrange(20, 60, 1)
@@ -11,7 +12,7 @@ class Bus:
         if len(self.listPassager) < self.nbPlacesMax:
             self.listPassager.append(passager)
         else:
-            raise LimitePassagerDepasserException()
+            raise LimitePassagerDepasserException
 
     def getNbPlacesMax(self):
         return self.nbPlacesMax
@@ -26,7 +27,7 @@ class Bus:
             if type(self.listPassager[i]) is Lyceen:
                 if self.listPassager[i].estAbsent() or not self.listPassager[i].hasClasse():
                     self.appel = False
-                    raise EleveAbsentException()
+                    raise EleveAbsentException
             i += 1
 
     def troisClassesMax(self):
@@ -35,10 +36,10 @@ class Bus:
             if type(passager) is Lyceen:
                 if passager.getClasse() not in listeClassePresenteBus:
                     listeClassePresenteBus.append(passager.getClasse())
-        if len(listeClassePresenteBus)<=3:
+        if len(listeClassePresenteBus) <= 3:
             return True
         else:
-            raise LimiteClasseDepasserException()
+            raise LimiteClasseDepasserException
         # return len(listeClassePresenteBus)<=3
 
     def unProfReferent(self):
@@ -46,14 +47,11 @@ class Bus:
         for passager in self.listPassager:
             if type(passager) is Prof:
                 if passager.estReferent():
-                    if profReferentPresent == False:
+                    if not profReferentPresent:
                         profReferentPresent = True
                     else:
-                        return False
-        if profReferentPresent:
-            return True
-        else:
-            raise NombreProfReferentException()
+                        raise NombreProfReferentException
+        return profReferentPresent
         # return profReferentPresent
 
     def unProfPourDixLyceen(self):
@@ -61,15 +59,14 @@ class Bus:
         nbEleve = 0
         for passager in self.listPassager:
             if type(passager) is Prof:
-                nbProf +=1
-            else : 
-                nbEleve +=1
-        if nbEleve / nbProf <=10:
+                nbProf += 1
+            else:
+                nbEleve += 1
+        if nbEleve / nbProf <= 10:
             return True
         else:
-            raise LimiteProfParEleveDepasserException()
+            raise LimiteProfParEleveDepasserException
         # return nbEleve / nbProf <=10
-
 
     def peutPartir(self):
         # Besoin d'une exception ?
@@ -124,11 +121,11 @@ class Classe:
         self.listLyceen = []
 
     def add_lyceen(self, lyceen):
-        if len(self.listLyceen)<self.nbMax:
+        if len(self.listLyceen) < self.nbMax:
             self.listLyceen.append(lyceen)
             lyceen.setNomClasse(self.nom)
-        else :
-            raise LimiteEleveDepasserException()
+        else:
+            raise LimiteEleveDepasserException
 
     def getNom(self):
         return self.nom

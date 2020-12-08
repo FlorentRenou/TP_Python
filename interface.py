@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QWidget, QPushButton, QLabel, QVBoxLayout
 from meteofrance_api import MeteoFranceClient
+
 import requests
+
 
 class Interface(QWidget):
     def __init__(self):
@@ -8,13 +10,13 @@ class Interface(QWidget):
         self.initUI()
 
     def get_meteo(self):
-            client = MeteoFranceClient()
+        client = MeteoFranceClient()
 
-            marseille = client.search_places('Marseille')[0]
-            current_forecast = client.get_forecast_for_place(marseille).current_forecast
+        marseille = client.search_places('Marseille')[0]
+        current_forecast = client.get_forecast_for_place(marseille).current_forecast
 
-            return current_forecast
-    
+        return current_forecast
+
     def initUI(self):
         self.setGeometry(100, 60, 1000, 800)
 
@@ -22,7 +24,8 @@ class Interface(QWidget):
 
         self.label = QLabel("")
         metteo = self.get_meteo()
-        metteo_label = QLabel(f"Il fait {metteo['T']['value']}°C, Humidité: {metteo['humidity']} à Marseille aujourd'hui")
+        metteo_label = QLabel(
+            f"Il fait {metteo['T']['value']}°C, Humidité: {metteo['humidity']} à Marseille aujourd'hui")
 
         self.setWindowTitle('Voyage scolaire')
         last_button = QPushButton('Saisir de nouveaux profs', self)
@@ -44,5 +47,3 @@ class Interface(QWidget):
         self.setLayout(layout)
 
         self.show()
-
-    
