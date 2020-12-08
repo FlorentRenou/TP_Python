@@ -6,9 +6,9 @@ from PyQt5.QtWidgets import QApplication
 
 
 ### On lance l'interface visuelle
-app = QApplication(sys.argv)
-ex = Interface()
-sys.exit(app.exec_())
+#app = QApplication(sys.argv)
+#ex = Interface()
+#sys.exit(app.exec_())
 
 
 p1 = Prof(True, 'nomp1', 'prenomp1')
@@ -40,6 +40,11 @@ classe1.add_lyceen(e8)
 classe1.add_lyceen(e9)
 classe1.add_lyceen(e10)
 classe1.add_lyceen(e11)
+
+#        try :
+#
+#        except LimiteEleveDepasserException:
+#           print("Il y a trop d'élève dans la classe")
 
 bus1 = Bus()
 bus1.add_passager(p1)

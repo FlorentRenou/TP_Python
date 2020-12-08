@@ -73,8 +73,18 @@ class Bus:
 
     def peutPartir(self):
         # Besoin d'une exception ?
-        return self.appelIsOk() and len(
-            self.listPassager) > 0 and self.troisClassesMax() and self.unProfReferent() and self.unProfPourDixLyceen()
+        try :
+            return self.appelIsOk() and len(self.listPassager) > 0 and self.troisClassesMax() and self.unProfReferent() and self.unProfPourDixLyceen()
+        except LimitePassagerDepasserException:
+            print("Il y a trop de passager")
+        except EleveAbsentException:
+            print("Il y a un élève absent")
+        except LimiteClasseDepasserException:
+            print("Il y a trop de classe dans le même bus")
+        except NombreProfReferentException:
+            print("Il n'y a pas le bon nombre de professeur référent")
+        except LimiteProfParEleveDepasserException:
+            print("Il n'y a pas assez de professeur")
 
     def partir(self, nom):
         print('Le bus %s est parti' % nom)
@@ -119,7 +129,7 @@ class Lyceen(Passager):
 class Classe:
     def __init__(self, nbMax, nom):
         self.nbMax = nbMax
-        # Need gestion unicité
+        # Need gestion unicité pour le nom
         self.nom = nom
         self.listLyceen = []
 
