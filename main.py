@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QApplication
 
 
 ### On lance l'interface visuelle
+
 app = QApplication(sys.argv)
 ex = Interface()
 sys.exit(app.exec_())
@@ -57,7 +58,7 @@ bus1.add_passager(e10)
 bus1.add_passager(e11)
 
 print(bus1.getNbPlacesMax())
-
+print(classe1.listLyceen)
 bus1.faireAppel()
 
 if bus1.peutPartir():

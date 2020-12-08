@@ -15,4 +15,6 @@ class LimiteProfParEleveDepasserException(Exception) :
 
 class LimiteEleveDepasserException(Exception) :
     pass
+class NomImpossibleException(Exception):
+    pass
 
