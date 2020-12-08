@@ -1,4 +1,14 @@
+import requests
+import sys
 from classes import *
+from interface import *
+from PyQt5.QtWidgets import QApplication
+
+
+### On lance l'interface visuelle
+app = QApplication(sys.argv)
+ex = Interface()
+sys.exit(app.exec_())
 
 
 p1 = Prof(True, 'nomp1', 'prenomp1')
@@ -20,9 +30,9 @@ classe2 = Classe(10, 'classe2')
 classe3 = Classe(10, 'classe3')
 classe4 = Classe(10, 'classe4')
 classe1.add_lyceen(e1)
-classe1.add_lyceen(e2)
-classe1.add_lyceen(e3)
-classe1.add_lyceen(e4)
+classe2.add_lyceen(e2)
+classe2.add_lyceen(e3)
+classe3.add_lyceen(e4)
 classe1.add_lyceen(e5)
 classe1.add_lyceen(e6)
 classe1.add_lyceen(e7)
