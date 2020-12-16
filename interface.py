@@ -2,6 +2,9 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QLabel, QVBoxLayout, QLineEdit
 from meteofrance_api import MeteoFranceClient
 from PyQt5.QtCore import Qt
 import requests
+from PyQt5.QtWidgets import QApplication
+import sys
+
 from classes import *
 
 
@@ -9,6 +12,7 @@ class Interface(QWidget):
     def __init__(self):
         super().__init__()
         self.listeClasse = []
+        self.listeClasse.append(Classe(25, "Classe1"))
         self.listeEleve = []
         self.listeProf = []
         self.listeBus = []
@@ -28,6 +32,7 @@ class Interface(QWidget):
         self.setGeometry(100, 60, 1000, 800)
         
         layout = QVBoxLayout()
+        self.layoutBus = QVBoxLayout()
         
         self.label = QLabel("")
         metteo = self.get_meteo()
@@ -56,7 +61,7 @@ class Interface(QWidget):
         self.caseReferentNon = QCheckBox("Non")
         self.comboClasse = QComboBox(self)
         for classe in self.listeClasse :
-            self.comboClasse.addItem(classe.nom())
+            self.comboClasse.addItem(classe.getNom())
         
         btnAjouterPassager = QPushButton('Valider', self)
         btnAjouterPassager.clicked.connect(self.ajouterPassager)
@@ -67,7 +72,18 @@ class Interface(QWidget):
         self.caseReferentOui.stateChanged.connect(self.etat_changeROui)
         self.caseReferentNon.stateChanged.connect(self.etat_changeRNon)
 
+        # Ajout de nouveaux CAR
+        labelCar = QLabel("Créer un nouveau bus : ")
+        self.nbMaxCar = QLineEdit("Nombre de places car")
+        btnAjouterCar = QPushButton('Valider', self)
+        btnAjouterCar.clicked.connect(self.ajouterCar)
 
+        # Ajout de nouvelles CLASSES
+        labelClasse = QLabel("Créer une nouvelle classe : ")
+        self.nbPlacesClasse = QLineEdit("Nombre de personne max dans la classe")
+        self.nomClasse = QLineEdit("Nom de la classe")
+        btnAjouterClasse = QPushButton('Valider', self)
+        btnAjouterClasse.clicked.connect(self.ajouterClasse)
 
         layout.addWidget(metteo_label)
         layout.addWidget(last_button)
@@ -85,6 +101,16 @@ class Interface(QWidget):
         layout.addWidget(self.caseReferentNon)
         layout.addWidget(self.comboClasse)
         layout.addWidget(btnAjouterPassager)
+        # Ajout nouveau car
+        layout.addWidget(labelCar)
+        layout.addWidget(self.nbMaxCar)
+        layout.addWidget(btnAjouterCar)
+        # Ajout nouvelle classe
+        layout.addWidget(labelClasse)
+        layout.addWidget(self.nbPlacesClasse)
+        layout.addWidget(self.nomClasse)
+        layout.addWidget(btnAjouterClasse)
+
         self.labelReferent.hide()
         self.caseReferentOui.hide()
         self.caseReferentNon.hide()
@@ -93,6 +119,7 @@ class Interface(QWidget):
         layout.addWidget(self.label)
 
         self.setLayout(layout)
+        
 
         self.show()
 
@@ -127,7 +154,8 @@ class Interface(QWidget):
             # Si c'est un lyceen
             if self.caseLyceen.checkState() == Qt.Checked:
                 self.listeEleve.append(Lyceen(self.nomPassager, self.prenomPassager))
-                self.comboClasse.currentText.add_lyceen(self.listeEleve[-1])
+                self.listeClasse[self.comboClasse.currentIndex()].add_lyceen(self.listeEleve[-1])
+                print(self.listeEleve)
             
             # Si c'est un prof
             if self.caseProf.checkState() == Qt.Checked:
@@ -137,6 +165,21 @@ class Interface(QWidget):
                 else :
                     self.listeProf.append(Prof(False, self.nomPassager, self.prenomPassager))
                 print(len(self.listeProf))
+        else :
+            NomImpossibleException()
+
+    def ajouterClasse(self):
+        # Si les valeurs ne sont pas vide
+        if self.nomClasse.text() !="" or self.nbPlacesClasse.text() != 0:
+            self.listeClasse.append(Classe(self.nbPlacesClasse, self.nomClasse))
+        else :
+            NomImpossibleException()
+    
+    def ajouterCar(self):
+        # Si les valeurs ne sont pas vide
+        if self.nbMaxCar.text() != 0:
+            self.listeBus.append(Bus(self.nbMaxCar))
+
         else :
             NomImpossibleException()
 
