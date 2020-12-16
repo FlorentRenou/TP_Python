@@ -8,11 +8,12 @@ from classes import *
 class Interface(QWidget):
     def __init__(self):
         super().__init__()
-        self.initUI()
         self.listeClasse = []
         self.listeEleve = []
         self.listeProf = []
         self.listeBus = []
+        self.initUI()
+        
 
 
     def get_meteo(self):
@@ -26,7 +27,6 @@ class Interface(QWidget):
     def initUI(self):
         self.setGeometry(100, 60, 1000, 800)
         
-
         layout = QVBoxLayout()
         
         self.label = QLabel("")
@@ -55,8 +55,8 @@ class Interface(QWidget):
         self.caseReferentOui = QCheckBox("Oui")
         self.caseReferentNon = QCheckBox("Non")
         self.comboClasse = QComboBox(self)
-        #for classe in self.listeClasse :
-        #    self.comboClasse.addItem(classe.nom())
+        for classe in self.listeClasse :
+            self.comboClasse.addItem(classe.nom())
         
         btnAjouterPassager = QPushButton('Valider', self)
         btnAjouterPassager.clicked.connect(self.ajouterPassager)
@@ -95,7 +95,6 @@ class Interface(QWidget):
         self.setLayout(layout)
 
         self.show()
-<<<<<<< HEAD
 
 
     def etat_changeP(self):
@@ -105,8 +104,6 @@ class Interface(QWidget):
             self.caseReferentOui.show()
             self.caseReferentNon.show()
             self.comboClasse.hide()
-        else:
-            print("decoche")
 
     def etat_changeL(self):
         if self.caseLyceen.checkState() == Qt.Checked:
@@ -115,20 +112,14 @@ class Interface(QWidget):
             self.caseReferentOui.hide()
             self.caseReferentNon.hide()
             self.comboClasse.show()
-        else:
-            print("decoche") 
     
     def etat_changeROui(self):
         if self.caseReferentOui.checkState() == Qt.Checked:
             self.caseReferentNon.setChecked(False)
-        else:
-            print("decoche")
 
     def etat_changeRNon(self):
         if self.caseReferentNon.checkState() == Qt.Checked:
             self.caseReferentOui.setChecked(False)
-        else:
-            print("decoche") 
     
     def ajouterPassager(self):
         # Si le nom n'est pas vide
@@ -153,5 +144,3 @@ class Interface(QWidget):
 
 
     
-=======
->>>>>>> 01c467384edb91611944ea998e04ce4a8b121f9e
