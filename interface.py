@@ -95,8 +95,6 @@ class Interface(QWidget):
         self.setLayout(layout)
 
         self.show()
-<<<<<<< HEAD
-
 
     def etat_changeP(self):
         if self.caseProf.checkState() == Qt.Checked:
@@ -148,10 +146,3 @@ class Interface(QWidget):
                 print(len(self.listeProf))
         else :
             NomImpossibleException()
-
-        
-
-
-    
-=======
->>>>>>> 01c467384edb91611944ea998e04ce4a8b121f9e

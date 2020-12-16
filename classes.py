@@ -92,6 +92,12 @@ class Passager:
         self.nom = nom
         self.prenom = prenom
 
+    def getNom(self):
+        return this.nom
+
+    def getPrenom(self):
+        return this.prenom
+
 
 class Prof(Passager):
     def __init__(self, referent, nom, prenom):

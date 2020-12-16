@@ -5,11 +5,124 @@ from interface import *
 from PyQt5.QtWidgets import QApplication
 
 
-### On lance l'interface visuelle
+print("Veuillez choisir la version à utilisé :")
+choix = int(input("1 : Interface | 2 : Console \n"))
 
-app = QApplication(sys.argv)
-ex = Interface()
-sys.exit(app.exec_())
+if choix == 1 :
+
+    ### On lance l'interface visuelle
+
+    app = QApplication(sys.argv)
+    ex = Interface()
+    sys.exit(app.exec_())
+
+if choix == 2 :
+
+    listeClasse = []
+    listeEleve = []
+    listeProf = []
+    listeBus = []
+
+    ### On lance la boucle de la version console
+    finGenerale = False
+    Tour = 0
+    while finGenerale != True :
+        finGenerale = True
+        print("Veuillez choisir ce que vous voulez faire")
+        choix = int(input("1 : Saisir de nouveaux passagers \n2 : Saisir de nouveaux bus \n3 : Mettre des passagers dans un car \n4 : Afficher les bus \n5 : Faire partir les bus \n6 : Faire l'appel en tant que prof référent \n7 : Quitter \n8 : Gestion des classes \n"))
+        
+        if choix == 1 :
+            #Saisir de nouveaux passagers
+            print("Quel est le passager ?")
+            choix = int(input("1 : Elève | 2 : Professeur \n"))
+
+            if choix == 1 :
+                #Elève
+                listeEleve.append(Lyceen( input("Nom de l'élève : "), input("Prenom de l'élève : ")))
+
+            if choix == 2 :
+                #Professeur
+                listeProf.append(Prof( input("Référents ? (True/False)"), input("Nom du professeur : "), input("Prenom du professeur : ")))
+
+            finGenerale = False
+
+        if choix == 2 :
+            #Saisir de nouveaux bus
+            #Besoin : Tous, les bus n'ont pas de nom pour les identifier
+            print("Pas implémenter")
+            #Nécessite d'ajouter un attribut nom aux bus
+            finGenerale = False
+
+        if choix == 3 :
+            #Mettre des passagers dans un car
+            #Besoin : Rajouter la condition de vérification des bus
+            #         Géré les mauvaises saisies
+            choixBus = input("Quel est le bus ? ")
+
+            for bus in listeBus :
+                #Nécessite de vérifier que le bus de la liste est celui choisi
+                if (False) :
+                    for passager in bus.listPassager :
+                        choixPassager = input("Quel est le passager ? ")
+
+                        if (passager.getNom == choixPassager) :
+                            bus.add_passager(passager)
+
+            finGenerale = False
+
+        if choix == 4 :
+            #Afficher les bus
+            #Besoin : Ajouter le type de passager
+            for bus in listeBus :
+                for passager in bus.listPassager :
+                    print("Nom : ", passager.getNom, " Prénom : ", passager.getPrenom)
+                    #Nécessite de de rajouté le type de passager ?
+
+            finGenerale = False
+
+        if choix == 5 :
+            #Faire partir les bus
+            #Besoin : Rajouter la condition de vérification des bus
+            #         Géré les mauvaises saisies
+            #         Revoir l'exécution de la méthode "partir" de "bus"
+            choixBus = input("Quel bus ? ")
+
+            for bus in listeBus :
+                #Nécessite de vérifier que le bus de la liste est celui choisi
+                if (False) :
+                    if bus.peutPartir():
+                        bus.partir("Choucroutte")
+
+                    else :
+                        print("Le bus n'est pas partie.")
+
+            finGenerale = False
+
+        if choix == 6 :
+            #Faire l'appel en tant que prof référent
+            #Besoin : Rajouter la condition de vérification des bus
+            #         Géré les mauvaises saisies
+            choixBus = input("Quel bus ? ")
+
+            for bus in listeBus :
+                #Nécessite de vérifier que le bus de la liste est celui choisi
+                if (False) :
+                    bus.faireAppel()
+
+            finGenerale = False
+
+        if choix == 7 :
+            #Quitter
+            print("Enrevoir !")
+
+        if choix == 8 :
+            #Gestion des classes
+            #Besoin : Tous, l'ajout d'une classe
+            #         l'ajout d'un élève dans une classe
+            print("Pas implémenter")
+
+else :
+    print("Choix non valide !\n")
 
 
 p1 = Prof(True, 'nomp1', 'prenomp1')
@@ -64,7 +177,7 @@ bus1.add_passager(e11)
 
 print(bus1.getNbPlacesMax())
 print(classe1.listLyceen)
-bus1.faireAppel()
+#bus1.faireAppel() 
 
 if bus1.peutPartir():
     bus1.partir("Choucroutte")
