@@ -130,7 +130,13 @@ class Lyceen(Passager):
         super().__init__(nom, prenom)
         self.absent = False
         self.nomClasse = None
+     
+    def getNom(self):
+        return self.nom
 
+    def getPrenom(self):
+        return self.prenom
+    
     def setNomClasse(self, nomClasse):
         self.nomClasse = nomClasse
 
