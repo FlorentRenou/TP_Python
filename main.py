@@ -34,14 +34,41 @@ if choix == 2 :
             choixActionEntite = int(input("1 : Saisir de nouveaux passagers \n2 : Saisir de nouveaux bus \n3 : Saisir une nouvelle classe \n4: Afficher la listes des entités"))
 
             if choixActionEntite == 1:
-                #Eleve
-                pass
+                #Passagers
+                print("Quel est le passager ?")
+                choixPassagers = int(input("1 : Elève | 2 : Professeur \n"))
+
+                if choixPassagers == 1 :
+                    #Elève
+                    print("Dans quelle classe ?")
+                    classeEleve = input("Nom de la classe : ")
+                    for classe in listeClasse :
+                        if (classe.getNom() == classeEleve) :
+                            eleveNom = str(input("Nom de l'élève : "))
+                            elevePrenom = str(input("Prenom de l'élève : "))
+                            listeEleve.append(Lyceen( eleveNom, elevePrenom))
+                            for eleve in listeEleve :
+                                if (eleve.getNom() == eleveNom and eleve.getPrenom() == elevePrenom) :
+                                    classe.add_lyceen(eleve)
+
+                if choixPassagers == 2 :
+                    #Professeur
+                    profNom = str(input("Nom du professeur : "))
+                    profPrenom = str(input("Prenom du professeur : "))
+                    profReferent = input("Référents ? (True/False)")
+                    listeProf.append(Prof(profReferent, profNom, profPrenom))
+
             elif choixActionEntite == 2:
                 #Bus
-                pass
+                busNom = str(input("Nom du bus : "))
+                listeBus.append(Bus(busNom))
+                
             elif choixActionEntite == 3:
                 #Classe
-                pass
+                classeTaille = int(input("Taille de la classe : "))
+                classeNom = str(input("Nom de la classe : "))
+                listeClasse.append(Classe(classeTaille,classeNom))
+
             elif choixActionEntite == 4:
                 #AfficherListes
                 pass
