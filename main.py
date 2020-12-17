@@ -5,7 +5,7 @@ from interface import *
 from PyQt5.QtWidgets import QApplication
 
 
-### On lance l'interface visuelle
+# On lance l'interface visuelle
 
 app = QApplication(sys.argv)
 ex = Interface()
