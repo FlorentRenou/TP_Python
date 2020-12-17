@@ -117,9 +117,30 @@ if choix == 2 :
 
         if choix == 8 :
             #Gestion des classes
-            #Besoin : Tous, l'ajout d'une classe
-            #         l'ajout d'un élève dans une classe
+            #Besoin : eleve.getNom et eleve.getPrenom possible ?
+            #         Géré les mauvaises saisies
             print("Pas implémenter")
+            print("Que voulez-vous faire ?")
+            choix = int(input("1 : Ajouter une classe | 2 : Ajouter un élève dans une classe \n"))
+
+            if choix == 1 :
+                #Ajouter une classe
+                listeClasse.append(Classe( input("Nombre maximum d'élèves dans la classe "), input("Nom de la classe : ")))
+
+            if choix == 2 :
+                #Ajouter un élève dans une classe
+                choixClasse = int(input("Dans quel classe voulez-vous ajouter l'élève ?"))
+                choixEleveNom = int(input("Nom de l'élève ?"))
+                choixElevePrenom = int(input("Prénom de l'élève ?"))
+
+                for listeClasse in classe :
+                    if (classe.getNom == choixClasse) :
+                        for listeEleve in eleve :
+                            if (eleve.getNom == choixEleveNom and eleve.getPrenom == choixElevePrenom) :
+                                classe.add_lyceen(eleve)
+
+            finGenerale = False
+
 
 else :
     print("Choix non valide !\n")
