@@ -3,7 +3,8 @@ from exception import *
 
 
 class Bus:
-    def __init__(self, nbPlacesMax = random.randrange(20, 60, 1) ):
+    def __init__(self, nom, nbPlacesMax = random.randrange(20, 60, 1) ):
+        self.nom = nom
         self.nbPlacesMax = nbPlacesMax
         self.appel = True  # Faire une liste des personnes absentes
         self.listPassager = []
@@ -19,6 +20,9 @@ class Bus:
 
     def getNbPlacesMax(self):
         return self.nbPlacesMax
+
+    def getNom(self):
+        return self.nom
 
     def appelIsOk(self):
         # Besoin d'une exception ?
