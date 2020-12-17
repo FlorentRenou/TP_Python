@@ -168,6 +168,7 @@ class Interface(QWidget):
         else :
             NomImpossibleException()
 
+
     def ajouterClasse(self):
         # Si les valeurs ne sont pas vide
         if self.nomClasse.text() !="" or self.nbPlacesClasse.text() != 0:

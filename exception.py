@@ -16,6 +16,8 @@ class NombreProfReferentException(Exception):
 
 class LimiteProfParEleveDepasserException(Exception):
     pass
+
+
 class NomImpossibleException(Exception):
     pass
 
