@@ -44,8 +44,18 @@ if choix == 2 :
                 pass
             elif choixActionEntite == 4:
                 #AfficherListes
-                pass
+                #Liste des classes
+                print("Liste des classes")
+                for classe in listeClasse:
+                    print(classe.getNom()," - ", classe.getNbMax())
 
+                print("Liste des élèves")
+                for eleve in listeEleve:
+                    print(eleve.getNom()," ", eleve.getPrenom())   
+
+                print("Liste des bus")
+                for bus in listeBus:
+                    print(bus.getNom()," - ", bus.getNbPlacesMax(), " places maximum.")
 
         elif choix == 2:
             print("Veuillez choisir une action ?")
