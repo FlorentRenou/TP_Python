@@ -3,10 +3,13 @@ from exception import *
 
 
 class Bus:
-    def __init__(self):
-        self.nbPlacesMax = random.randrange(20, 60, 1)
+    def __init__(self, nbPlacesMax = random.randrange(20, 60, 1) ):
+        self.nbPlacesMax = nbPlacesMax
         self.appel = True  # Faire une liste des personnes absentes
         self.listPassager = []
+
+    def setNbPlacesMax(self, nb):
+        self.nbPlacesMax = nb
 
     def add_passager(self, passager):
         if len(self.listPassager) < self.nbPlacesMax:

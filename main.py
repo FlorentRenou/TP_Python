@@ -4,7 +4,6 @@ from classes import *
 from interface import *
 from PyQt5.QtWidgets import QApplication
 
-
 print("Veuillez choisir la version à utilisé :")
 choix = int(input("1 : Interface | 2 : Console \n"))
 
