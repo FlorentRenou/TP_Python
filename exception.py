@@ -21,6 +21,9 @@ class LimiteProfParEleveDepasserException(Exception):
 class NomImpossibleException(Exception):
     pass
 
+class BusDejaPartiException(Exception):
+    pass
+
 
 class LimiteEleveDepasserException(Exception):
     pass

@@ -22,16 +22,63 @@ if choix == 2 :
     listeProf = []
     listeBus = []
 
+    p1 = Prof(True, 'nomp1', 'prenomp1')
+    p2 = Prof(False, 'nomp2', 'prenomp2')
+    e1 = Lyceen('nome1', 'prenome1')
+    e2 = Lyceen('nome2', 'prenome2')
+    e3 = Lyceen('nome3', 'prenome3')
+    e4 = Lyceen('nome4', 'prenome4')
+    e5 = Lyceen('nome5', 'prenome5')
+    e6 = Lyceen('nome6', 'prenome6')
+    e7 = Lyceen('nome7', 'prenome7')
+    e8 = Lyceen('nome8', 'prenome8')
+    e9 = Lyceen('nome9', 'prenome9')
+    e10 = Lyceen('nome10', 'prenome10')
+    e11 = Lyceen('nome11', 'prenome11')
+
+    classe1 = Classe(10, 'classe1')
+    classe2 = Classe(10, 'classe2')
+    classe3 = Classe(10, 'classe3')
+    classe4 = Classe(10, 'classe4')
+    classe1.add_lyceen(e1)
+    classe2.add_lyceen(e2)
+    classe2.add_lyceen(e3)
+    classe3.add_lyceen(e4)
+    classe1.add_lyceen(e5)
+    classe1.add_lyceen(e6)
+    classe1.add_lyceen(e7)
+    classe1.add_lyceen(e8)
+    classe1.add_lyceen(e9)
+    classe1.add_lyceen(e10)
+    classe1.add_lyceen(e11)
+
+    bus1 = Bus("bus1")
+    bus1.add_passager(p1)
+    bus1.add_passager(p2)
+    bus1.add_passager(e1)
+    bus1.add_passager(e2)
+    bus1.add_passager(e3)
+    bus1.add_passager(e4)
+    bus1.add_passager(e5)
+    bus1.add_passager(e6)
+    bus1.add_passager(e7)
+    bus1.add_passager(e8)
+    bus1.add_passager(e9)
+    bus1.add_passager(e10)
+    bus1.add_passager(e11)
+
+    listeBus.append(bus1)
+
     ### On lance la boucle de la version console
     finGenerale = False
     Tour = 0
     while not finGenerale:
-        print("Veuillez choisir ce que vous voulez faire")
-        choix = int(input("1 : Gestions des entitées \n2 : Gestion du départ des bus \n3 : Quitter"))
+        print("\nVeuillez choisir ce que vous voulez faire:\n")
+        choix = int(input("1 : Gestions des entitées \n2 : Gestion du départ des bus \n3 : Quitter\n"))
 
         if choix == 1:
-            print("Veuillez choisir une action ?")
-            choixActionEntite = int(input("1 : Saisir de nouveaux passagers \n2 : Saisir de nouveaux bus \n3 : Saisir une nouvelle classe \n4: Afficher la listes des entités"))
+            print("\nVeuillez choisir une action:\n")
+            choixActionEntite = int(input("1 : Saisir de nouveaux passagers \n2 : Saisir de nouveaux bus \n3 : Saisir une nouvelle classe \n4: Afficher la listes des entités\n"))
 
             if choixActionEntite == 1:
                 #Eleve
@@ -48,18 +95,43 @@ if choix == 2 :
 
 
         elif choix == 2:
-            print("Veuillez choisir une action ?")
-            choixActionBus = int(input("1 : Afficher les bus et leurs passagers \n2 : Faire l'appel dans un bus \n3 : Faire partir un bus"))
+            print("\nVeuillez choisir une action:\n")
+            choixActionBus = int(input("1 : Afficher les bus et leurs passagers \n2 : Faire l'appel dans un bus \n3 : Faire partir un bus\n"))
 
             if choixActionBus == 1:
                 #AfficherBusEtPassagers
-                pass
+                print("Ils y a actuellement "+str(len(listeBus))+" bus")
+                for bus in listeBus:
+                    print("\nLe bus "+bus.getNom()+" transporte "+str(len(bus.listPassager))+" passagers")
+                    print("    Ces passagers sont: ")
+
+                    listpassager = "        "
+                    for passager in bus.listPassager:
+                        listpassager += passager.getPrenom()+" "+passager.getNom()+"; "
+                    print(listpassager[:-1])
+
             elif choixActionBus == 2:
                 #Faireappel
-                pass
+                nomBus = input("Nom du bus: \n")
+                for bus in listeBus:
+                    if bus.getNom() == nomBus:
+                        try:
+                            bus.faireAppel()
+                            print("Le bus peux partir : L'appel à été fait avec succès!")
+
+                        except EleveAbsentException:
+                            print("Le bus ne peux pas partir car il y a au moins un élève absent et/ou n'a pas de classe")
+
+
+
             elif choixActionBus == 3:
                 #FairePartirBus
-                pass
+                nomBus = input("Nom du bus a faire partir: \n")
+                for bus in listeBus:
+                    if bus.getNom() == nomBus:
+                        if bus.peutPartir():
+                            bus.partir(nomBus)
+
 
         else:
             finGenerale = True
@@ -219,12 +291,7 @@ classe1.add_lyceen(e9)
 classe1.add_lyceen(e10)
 classe1.add_lyceen(e11)
 
-#        try :
-#
-#        except LimiteEleveDepasserException:
-#           print("Il y a trop d'élève dans la classe")
-
-bus1 = Bus()
+bus1 = Bus("bus1")
 bus1.add_passager(p1)
 bus1.add_passager(p2)
 bus1.add_passager(e1)
@@ -241,7 +308,7 @@ bus1.add_passager(e11)
 
 print(bus1.getNbPlacesMax())
 print(classe1.listLyceen)
-#bus1.faireAppel() 
+#bus1.faireAppel()
 
 if bus1.peutPartir():
     bus1.partir("Choucroutte")

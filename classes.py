@@ -8,6 +8,7 @@ class Bus:
         self.nbPlacesMax = nbPlacesMax
         self.appel = True  # Faire une liste des personnes absentes
         self.listPassager = []
+        self.estParti = False
 
     def setNbPlacesMax(self, nb):
         self.nbPlacesMax = nb
@@ -75,10 +76,16 @@ class Bus:
             raise LimiteProfParEleveDepasserException
         # return nbEleve / nbProf <=10
 
+    def estDejaParti(self):
+        if self.estParti:
+            raise BusDejaPartiException
+        else:
+            return False
+
     def peutPartir(self):
         # Besoin d'une exception ?
         try :
-            return self.appelIsOk() and len(self.listPassager) > 0 and self.troisClassesMax() and self.unProfReferent() and self.unProfPourDixLyceen()
+            return self.appelIsOk() and len(self.listPassager) > 0 and self.troisClassesMax() and self.unProfReferent() and self.unProfPourDixLyceen() and not self.estDejaParti()
         except LimitePassagerDepasserException:
             print("Il y a trop de passager")
         except EleveAbsentException:
@@ -89,8 +96,11 @@ class Bus:
             print("Il n'y a pas le bon nombre de professeur référent")
         except LimiteProfParEleveDepasserException:
             print("Il n'y a pas assez de professeur")
+        except BusDejaPartiException:
+            print("Le bus est déjà parti!")
 
     def partir(self, nom):
+        self.estParti = True
         print('Le bus %s est parti' % nom)
 
 
