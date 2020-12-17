@@ -25,9 +25,53 @@ if choix == 2 :
     ### On lance la boucle de la version console
     finGenerale = False
     Tour = 0
-    while finGenerale != True :
-        finGenerale = True
+    while not finGenerale:
         print("Veuillez choisir ce que vous voulez faire")
+        choix = int(input("1 : Gestions des entitées \n2 : Gestion du départ des bus \n3 : Quitter"))
+
+        if choix == 1:
+            print("Veuillez choisir une action ?")
+            choixActionEntite = int(input("1 : Saisir de nouveaux passagers \n2 : Saisir de nouveaux bus \n3 : Saisir une nouvelle classe \n4: Afficher la listes des entités"))
+
+            if choixActionEntite == 1:
+                #Eleve
+                pass
+            elif choixActionEntite == 2:
+                #Bus
+                pass
+            elif choixActionEntite == 3:
+                #Classe
+                pass
+            elif choixActionEntite == 4:
+                #AfficherListes
+                pass
+
+
+        elif choix == 2:
+            print("Veuillez choisir une action ?")
+            choixActionBus = int(input("1 : Afficher les bus et leurs passagers \n2 : Faire l'appel dans un bus \n3 : Faire partir un bus"))
+
+            if choixActionBus == 1:
+                #AfficherBusEtPassagers
+                pass
+            elif choixActionBus == 2:
+                #Faireappel
+                pass
+            elif choixActionBus == 3:
+                #FairePartirBus
+                pass
+
+        else:
+            finGenerale = True
+
+
+
+
+
+
+
+
+'''
         choix = int(input("1 : Saisir de nouveaux passagers \n2 : Saisir de nouveaux bus \n3 : Mettre des passagers dans un car \n4 : Afficher les bus \n5 : Faire partir les bus \n6 : Faire l'appel en tant que prof référent \n7 : Quitter \n8 : Gestion des classes \n"))
         
         if choix == 1 :
@@ -143,7 +187,7 @@ if choix == 2 :
 
 else :
     print("Choix non valide !\n")
-
+'''
 
 p1 = Prof(True, 'nomp1', 'prenomp1')
 p2 = Prof(False, 'nomp2', 'prenomp2')

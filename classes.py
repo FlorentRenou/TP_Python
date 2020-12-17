@@ -96,10 +96,10 @@ class Passager:
         self.prenom = prenom
 
     def getNom(self):
-        return this.nom
+        return self.nom
 
     def getPrenom(self):
-        return this.prenom
+        return self.prenom
 
 
 class Prof(Passager):
