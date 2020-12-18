@@ -102,7 +102,8 @@ if choix == 2 :
                     #Professeur
                     profNom = str(input("Nom du professeur : "))
                     profPrenom = str(input("Prenom du professeur : "))
-                    profReferent = input("Référents ? (True/False)")
+                    profReferent = bool(input("Référents ? (True/False)"))
+
                     listeProf.append(Prof(profReferent, profNom, profPrenom))
 
             elif choixActionEntite == 2:
@@ -118,15 +119,22 @@ if choix == 2 :
 
             elif choixActionEntite == 4:
                 #AfficherListes
-                print("Liste des classes")
+                print("Liste des classes :")
                 for classe in listeClasse:
                     print(classe.getNom()," - ", classe.getNbMax())
 
-                print("Liste des élèves")
+                print("Liste des élèves :")
                 for eleve in listeEleve:
-                    print(eleve.getNom()," ", eleve.getPrenom())   
+                    print(eleve.getNom()," ", eleve.getPrenom())  
+                
+                print("Liste des professeurs :")
+                for prof in listeProf:
+                    if (prof.estReferent) :
+                        print(prof.getNom()," ", prof.getPrenom(), " est un professeur référent")
+                    else :
+                        print(prof.getNom()," ", prof.getPrenom(), " n'est pas un professeur référent")
 
-                print("Liste des bus")
+                print("Liste des bus :")
                 for bus in listeBus:
                     print(bus.getNom()," - ", bus.getNbPlacesMax(), " places maximum.")
 
