@@ -3,10 +3,10 @@ from exception import *
 
 
 class Bus:
-    def __init__(self, nom, nbPlacesMax = random.randrange(20, 60, 1) ):
+    def __init__(self, nom, nbPlacesMax=random.randrange(20, 60, 1)):
         self.nom = nom
         self.nbPlacesMax = nbPlacesMax
-        self.appel = True  # Faire une liste des personnes absentes
+        self.appel = False
         self.listPassager = []
         self.estParti = False
 
@@ -26,17 +26,16 @@ class Bus:
         return self.nom
 
     def appelIsOk(self):
-        # Besoin d'une exception ?
         return self.appel
 
     def faireAppel(self):
         i = 0
-        while self.appel and i <= len(self.listPassager) - 1:
+        while not self.appelIsOk() and i <= len(self.listPassager) - 1:
             if type(self.listPassager[i]) is Lyceen:
                 if self.listPassager[i].estAbsent() or not self.listPassager[i].hasClasse():
-                    self.appel = False
                     raise EleveAbsentException
             i += 1
+        self.appel = True if len(self.listPassager) == i else False
 
     def troisClassesMax(self):
         listeClassePresenteBus = []
@@ -84,8 +83,9 @@ class Bus:
 
     def peutPartir(self):
         # Besoin d'une exception ?
-        try :
-            return self.appelIsOk() and len(self.listPassager) > 0 and self.troisClassesMax() and self.unProfReferent() and self.unProfPourDixLyceen() and not self.estDejaParti()
+        try:
+            return self.appelIsOk() and len(
+                self.listPassager) > 0 and self.troisClassesMax() and self.unProfReferent() and self.unProfPourDixLyceen() and not self.estDejaParti()
         except LimitePassagerDepasserException:
             print("Il y a trop de passager")
         except EleveAbsentException:
@@ -130,18 +130,18 @@ class Lyceen(Passager):
         super().__init__(nom, prenom)
         self.absent = False
         self.nomClasse = None
-     
+
     def getNom(self):
         return self.nom
 
     def getPrenom(self):
         return self.prenom
-    
+
     def setNomClasse(self, nomClasse):
         self.nomClasse = nomClasse
 
     def estAbsent(self):
-        if random.randrange(0, 100, 1) <= 1:
+        if random.randrange(0, 20, 1) <= 1:
             self.absent = True
         return self.absent
 
